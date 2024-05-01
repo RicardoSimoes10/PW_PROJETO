@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+/*HEADER*/
+.mainHeader {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.mainNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+.navLinks ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navLinks li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navLinks a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navLinks a:hover {
+    color: #007bff;
+}
+
+
+/*CONTAINER PRINCIPAL*/
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: .4s;
+    display: none;
+}
+
+.container:hover{
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/*INPUTS DAS TAREFAS*/
+.inputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+input[type="text"] {
+    border: none;
+    width: 670px;
+    height: 50px;
+    padding: 0 16px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+input:hover{
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.addTaskButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #007bff;
+    color: white;
+    padding: 0 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.addTaskButton:hover {
+    background-color: #0056b3;
+    transition: .8s;
+}
+
+
+/*LISTA DAS TAREFAS*/
+.taskList ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.taskList li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.taskList li:hover {
+    background-color: #f0f0f0;
+}
+
+.removeTaskButton .editTaskButton{
+    position: relative;
+}
+
+
+.taskList {
+    list-style-type: none;
+    padding: 0;
+}
+.taskList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
