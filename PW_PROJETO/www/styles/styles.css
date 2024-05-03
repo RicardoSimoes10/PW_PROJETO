@@ -58,7 +58,7 @@ body {
     display: none;
 }
 
-.container:hover{
+.container:hover {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -85,7 +85,7 @@ input[type="text"] {
 
 }
 
-input:hover{
+input:hover {
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -130,7 +130,7 @@ input:hover{
     background-color: #f0f0f0;
 }
 
-.removeTaskButton .editTaskButton{
+.removeTaskButton .editTaskButton {
     position: relative;
 }
 
@@ -139,6 +139,7 @@ input:hover{
     list-style-type: none;
     padding: 0;
 }
+
 .taskList li {
     display: flex;
     justify-content: space-between;
