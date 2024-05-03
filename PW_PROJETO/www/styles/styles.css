@@ -46,11 +46,35 @@ body {
     color: #007bff;
 }
 
+/*Imagem Fundo*/
+.backGround {
+    width: 100%;
+    height: 300px; /* Set your desired height */
+    background-image: url('../images/bg.jpg'); /* Replace 'your-image-url.jpg' with the URL of your image */
+    background-size: cover; /* Adjust the background size to cover the entire div */
+    background-position: center; /* Center the background image */
+}
+
+/*Container com o formulario*/
+.formContainer{
+    max-width: 700px;
+    margin: -250px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: .4s;
+    display: none;
+}
+
 
 /*CONTAINER PRINCIPAL*/
+.tituloTarefas{
+    display: none;
+}
+
 .container {
     max-width: 700px;
-    margin: 50px auto;
+    margin: 350px auto;
     padding: 20px;
     border-radius: 8px;
     background-color: #fff;
@@ -144,4 +168,8 @@ input:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.footer{
+    margin: -300px auto;
 }

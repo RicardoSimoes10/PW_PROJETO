@@ -8,7 +8,7 @@
 window.onload = function (event) {
     var info = new Information("mainInformation");
     window.info = info;
-    generateMockupdateTask();
+    //generateMockupdateTask();
 };
 
 function generateMockupdateTask() {
@@ -20,15 +20,13 @@ function generateMockupdateTask() {
 
 function tableLine(object) {
     var ul = document.createElement("ul");
-    var li = null;
     for (var property in object) {
-        if ((object[property] instanceof Function))
-            continue;
-        else {
-            li = document.createElement("li");
+        if (object.hasOwnProperty(property) && typeof object[property] !== 'function') {
+            var li = document.createElement("li");
             li.textContent = object[property];
+            ul.appendChild(li);
         }
-        ul.appendChild(li);
     }
     return ul;
-};
+}
+

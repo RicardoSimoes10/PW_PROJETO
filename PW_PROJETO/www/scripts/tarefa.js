@@ -9,6 +9,7 @@
 */
 class Tarefa {
     constructor(id, taskContent, taskDate){
+        const text = document.getElementById("information");
         this.id = "Tarefa: " + id;
         this.taskContent = taskContent;
         this.taskDate = "Data: " + taskDate;

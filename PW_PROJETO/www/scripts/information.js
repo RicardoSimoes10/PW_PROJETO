@@ -17,26 +17,36 @@ class Information {
     }
 
     /*Mostra todas as tarefas*/
-    showTasks(){
-        document.getElementById(this.id).style.display = "block";
+    showTasks() {
+        if (this.tasks != "") {
+            document.getElementById("tituloListaTarefas").style.display = "block";
+            document.getElementById(this.id).style.display = "block";
+        }
+
+        document.getElementById("form").style.display = "block";
         document.getElementById("information").innerHTML = "";
 
         let lista = document.getElementById("information");
-        lista.appendChild(tableLine(new Tarefa()));
         this.tasks.forEach(task => {
             let li = tableLine(task);
             lista.appendChild(li);
         });
         document.getElementById("taskListDivInformation").replaceChildren(lista);
-    };
+    }
+
 
     /*Adiciona uma tarefa*/
-    addTasks(){
+    addTasks() {
         /*TODO - Adicionar Tarefas*/
         console.log("ADD");
         let taskId = this.tasks.length + 1;
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
+
+        if ((taskText == "") || (taskDate == "")) {
+            alert("Preencha os campos!!");
+            return;
+        }
 
         let newTask = new Tarefa(taskId, taskText, taskDate);
         this.tasks.push(newTask);
@@ -47,13 +57,13 @@ class Information {
     };
 
     /*Edita uma tarefa*/
-    updateTasks(){
+    updateTasks() {
         /*TODO - Editar Tarefas*/
         console.log("UPDATE");
     };
 
     /*Remove uma tarefa*/
-    removeTasks(){
+    removeTasks() {
         /*TODO - Remover Tarefas*/
         console.log("REMOVE");
     };
