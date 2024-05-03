@@ -9,8 +9,8 @@
 */
 class Tarefa {
     constructor(id, taskContent, taskDate){
-        this.id = id;
+        this.id = "Tarefa: " + id;
         this.taskContent = taskContent;
-        this.taskDate = taskDate;
+        this.taskDate = "Data: " + taskDate;
     }
 }
