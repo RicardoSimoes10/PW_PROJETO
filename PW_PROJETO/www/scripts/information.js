@@ -48,7 +48,8 @@ class Information {
             return;
         }
 
-        let newTask = new Tarefa(taskId, taskText, taskDate);
+        //let newTask = new Tarefa(taskId, taskText, taskDate);
+        let newTask = new Tarefa(taskId, taskText);
         this.tasks.push(newTask);
 
         this.showTasks();
