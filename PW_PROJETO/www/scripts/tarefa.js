@@ -8,10 +8,9 @@
 * @param {Date} taskDate - data de nascimento da pessoa
 */
 class Tarefa {
-    constructor(id, taskContent){
-        const text = document.getElementById("information");
+    constructor(id, taskContent, taskDate){
         this.id = id;
         this.taskContent = taskContent;
-        //this.taskDate = "Data: " + taskDate;
+        this.taskDate = taskDate;
     }
 }

@@ -12,49 +12,60 @@ window.onload = function (event) {
 };
 
 function generateMockupdateTask() {
-    info.tasks.push(new Tarefa(1, "teste1"/*, "2000-12-20"*/));
-    info.tasks.push(new Tarefa(2, "teste2"/*, "2000-12-20"*/));
-    info.tasks.push(new Tarefa(3, "teste3"/*, "2000-12-20"*/));
+    info.tasks.push(new Tarefa(1, "teste1", "2000-12-20"));
+    info.tasks.push(new Tarefa(2, "teste2", "2000-12-20"));
+    info.tasks.push(new Tarefa(3, "teste3", "2000-12-20"));
 }
 
 
 function tableLine(task, index) {
-    //Cria uma lista e adiona os elementos do array na lista
     var li = document.createElement("li");
+    
+    var detailsDiv = document.createElement("div");
+    detailsDiv.style.display = "inline-block";
+    
     for (var property in task) {
         if (task.hasOwnProperty(property) && property !== 'id') {
-            li.textContent += task[property] + " ";
+            var span = document.createElement("span");
+            span.textContent = task[property];
+            
+            if (property === 'taskText') {
+                span.style.fontSize = "inherit";
+            } else if (property === 'taskDate') {
+                span.style.fontSize = "11px";
+            }
+            detailsDiv.appendChild(span);
+            detailsDiv.appendChild(document.createElement("br"));
         }
     }
+    
+    // Cria uma div para os buttons
+    var buttonDiv = document.createElement("div");
+    buttonDiv.className = "divButtonEditRemove";
 
-    var buttonDiv = document.createElement("div"); //cria uma div
-
-    var deleteBtn = document.createElement("button"); //cria um button para remover
+    var deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
-
-    //Adiciona um evento "click" ao button remover
-    deleteBtn.addEventListener("click", function () {
+    deleteBtn.addEventListener("click", function() {
         window.info.removeTasks(index);
     });
-    deleteBtn.className = "removeTaskButton"; //cria uma class para o button remover
+    deleteBtn.className = "removeTaskButton";
 
-
-    var editBtn = document.createElement("button"); //cria um button para editar
+    var editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
-
-    //Adiciona um evento "click" ao button editar
-    editBtn.addEventListener("click", function () {
+    editBtn.addEventListener("click", function() {
         window.info.updateTasks(index);
     });
-    editBtn.className = "editTaskButton"; //cria uma class para o button editar
+    editBtn.className = "editTaskButton";
 
-    //Adiciona os dois buttons na div
-    buttonDiv.appendChild(editBtn);
+    //Adiciona os buttons à div
     buttonDiv.appendChild(deleteBtn);
+    buttonDiv.appendChild(editBtn);
 
-    li.appendChild(buttonDiv); //Adiciona a div na lista
+    li.appendChild(detailsDiv); //Adiciona a div com o texto e a data à lista
+    li.appendChild(buttonDiv); //Adiciona a div com os buttons à lista
 
     return li;
 }
+
 
 

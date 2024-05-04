@@ -158,6 +158,13 @@ input:hover {
     background-color: #f0f0f0;
 }
 
+
+.divButtonEditRemove{
+    display: flex;
+    flex-direction: column-reverse;
+    float: right;
+}
+
 .removeTaskButton,
 .editTaskButton {
     border: none;
@@ -174,7 +181,6 @@ input:hover {
 }
 
 .taskList li {
-    display: flex;
     justify-content: space-between;
     align-items: center;
 }
