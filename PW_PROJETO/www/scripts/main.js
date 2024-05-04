@@ -12,7 +12,7 @@ window.onload = function (event) {
 };
 
 function generateMockupdateTask() {
-    info.tasks.push(new Tarefa(1, "teste1", "2000-12-20"));
+    info.tasks.push(new Tarefa(1, "teste1 teste1 teste1 teste1", "2000-12-20"));
     info.tasks.push(new Tarefa(2, "teste2", "2000-12-20"));
     info.tasks.push(new Tarefa(3, "teste3", "2000-12-20"));
 }
@@ -43,17 +43,19 @@ function tableLine(task, index) {
     var buttonDiv = document.createElement("div");
     buttonDiv.className = "divButtonEditRemove";
 
+    //Cria um button para remover 
     var deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", function() {
-        window.info.removeTasks(index);
+        window.info.removeTasks(task.id);//Passa automaticamente o id da tarefa para remover a mesma
     });
     deleteBtn.className = "removeTaskButton";
 
+    //Cria um button para editar 
     var editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function() {
-        window.info.updateTasks(index);
+        window.info.updateTasks(task.id);//Passa automaticamente o id da tarefa para editar a mesma
     });
     editBtn.className = "editTaskButton";
 

@@ -38,7 +38,6 @@ class Information {
     /*Adiciona uma tarefa*/
     addTasks() {
         /*TODO - Adicionar Tarefas*/
-        console.log("ADD");
         let taskId = this.tasks.length + 1;
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
@@ -57,14 +56,33 @@ class Information {
     };
 
     /*Edita uma tarefa*/
-    updateTasks() {
+    updateTasks(id) {
         /*TODO - Editar Tarefas*/
-        console.log("UPDATE");
+
+        let input = prompt("Ex:  TEXTO|DATA");
+        let editedTask = input.split('|');
+
+        console.log(editedTask);
+        
+        let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
+
+        if (taskToUpdate) {
+            taskToUpdate.taskContent = editedTask[0];
+            taskToUpdate.taskDate= editedTask[1];
+    
+            console.log("Tarefa editada com sucesso");
+        } else {
+            console.log("Tarefa não encontrada");
+        }
+
+        this.showTasks();
+        console.log(this.tasks);
     };
 
     /*Remove uma tarefa*/
     removeTasks() {
         /*TODO - Remover Tarefas*/
         console.log("REMOVE");
+
     };
 }
