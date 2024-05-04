@@ -37,7 +37,6 @@ class Information {
 
     /*Adiciona uma tarefa*/
     addTasks() {
-        /*TODO - Adicionar Tarefas*/
         let taskId = this.tasks.length + 1;
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
@@ -57,8 +56,6 @@ class Information {
 
     /*Edita uma tarefa*/
     updateTasks(id) {
-        /*TODO - Editar Tarefas*/
-
         let input = prompt("Ex:  TEXTO|DATA");
         let editedTask = input.split('|');
 
