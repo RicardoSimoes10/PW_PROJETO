@@ -45,6 +45,7 @@ function tableLine(task, index) {
 
     //Cria um button para remover 
     var deleteBtn = document.createElement("button");
+    deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", function() {
         window.info.removeTasks(task.id);//Passa automaticamente o id da tarefa para remover a mesma
@@ -53,6 +54,7 @@ function tableLine(task, index) {
 
     //Cria um button para editar 
     var editBtn = document.createElement("button");
+    editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function() {
         window.info.updateTasks(task.id);//Passa automaticamente o id da tarefa para editar a mesma

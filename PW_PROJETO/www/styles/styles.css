@@ -168,10 +168,14 @@ input:hover {
 .removeTaskButton,
 .editTaskButton {
     border: none;
-    padding: 10;
     background: none;
     color: red;
     cursor: pointer;
+}
+
+.removeTaskButton:hover,
+.editTaskButton:hover{
+    text-decoration: underline;
 }
 
 

@@ -61,8 +61,6 @@ class Information {
 
         let input = prompt("Ex:  TEXTO|DATA");
         let editedTask = input.split('|');
-
-        console.log(editedTask);
         
         let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
 
