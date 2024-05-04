@@ -61,20 +61,13 @@ class Information {
 
         let input = prompt("Ex:  TEXTO|DATA");
         let editedTask = input.split('|');
-        
+
         let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
 
-        if (taskToUpdate) {
-            taskToUpdate.taskContent = editedTask[0];
-            taskToUpdate.taskDate= editedTask[1];
-    
-            console.log("Tarefa editada com sucesso");
-        } else {
-            console.log("Tarefa não encontrada");
-        }
+        taskToUpdate.taskContent = editedTask[0]; //Edita o texto
+        taskToUpdate.taskDate = editedTask[1]; //Edita a data
 
-        this.showTasks();
-        console.log(this.tasks);
+        this.showTasks(); //Atualiza a tabela
     };
 
     /*Remove uma tarefa*/
