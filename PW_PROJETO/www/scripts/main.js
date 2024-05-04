@@ -18,7 +18,7 @@ function generateMockupdateTask() {
 }
 
 
-function tableLine(task, index) {
+function tableLine(task) {
     var li = document.createElement("li");
     
     var detailsDiv = document.createElement("div");
