@@ -47,7 +47,7 @@ class Information {
         }
 
         let newTask = new Tarefa(taskId, taskText, taskDate);
-        this.tasks.push(newTask);
+        this.tasks.unshift(newTask);
 
         this.showTasks();
 
