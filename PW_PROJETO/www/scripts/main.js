@@ -45,37 +45,38 @@ function tableLine(task) {
         }
     }
     
-    // Cria uma div para os buttons
+    // Create a div for the buttons
     var buttonDiv = document.createElement("div");
     buttonDiv.className = "divButtonEditRemove";
 
-    //Cria um button para remover 
+    // Create a button to remove 
     var deleteBtn = document.createElement("button");
     deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", function() {
-        window.info.removeTasks(task.id);//Passa automaticamente o id da tarefa para remover a mesma
+        window.info.removeTasks(task.id); // Automatically pass the task id to remove it
     });
     deleteBtn.className = "removeTaskButton";
 
-    //Cria um button para editar 
+    // Create a button to edit 
     var editBtn = document.createElement("button");
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function() {
-        window.info.updateTasks(task.id);//Passa automaticamente o id da tarefa para editar a mesma
+        window.info.updateTasks(task.id); // Automatically pass the task id to edit it
     });
     editBtn.className = "editTaskButton";
 
-    //Adiciona os buttons à div
+    // Add buttons to the div
     buttonDiv.appendChild(deleteBtn);
     buttonDiv.appendChild(editBtn);
 
-    li.appendChild(detailsDiv); //Adiciona a div com o texto e a data à lista
-    li.appendChild(buttonDiv); //Adiciona a div com os buttons à lista
+    li.appendChild(detailsDiv); // Add the div with text and date to the list
+    li.appendChild(buttonDiv); // Add the div with buttons to the list
 
     return li;
 }
+
 
 
 
