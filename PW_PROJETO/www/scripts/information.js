@@ -55,6 +55,10 @@ class Information {
         localStorage.setItem("tarefas", data);
 
         this.showTasks(); //Atualiza a tabela
+
+        //Limpa os inputs depois de adicionar tarefa
+        document.getElementById("taskInput").value = "";
+        document.getElementById("taskDate").value = "";
     };
 
     /*Edita uma tarefa*/
