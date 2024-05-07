@@ -50,9 +50,11 @@ class Information {
         let newTask = new Tarefa(taskId, taskText, taskDate);
         this.tasks.unshift(newTask);
 
-        this.showTasks();
+        //Guarda o array no localStorage
+        let data = JSON.stringify(this.tasks);
+        localStorage.setItem("tarefas", data);
 
-        console.log(this.tasks);
+        this.showTasks(); //Atualiza a tabela
     };
 
     /*Edita uma tarefa*/
@@ -83,6 +85,10 @@ class Information {
         taskToUpdate.taskContent = editedTask[0]; //Edita o texto
         taskToUpdate.taskDate = editedTask[1]; //Edita a data
 
+        //Guarda o array no localStorage
+        let data = JSON.stringify(this.tasks);
+        localStorage.setItem("tarefas", data);
+
         this.showTasks(); //Atualiza a tabela
     };
 
@@ -103,6 +109,10 @@ class Information {
         } else {
             alert("Tarefa não encontrada!!");
         }
+
+        //Guarda o array no localStorage
+        let data = JSON.stringify(this.tasks);
+        localStorage.setItem("tarefas", data);
 
         this.showTasks();//Atualiza a tabela
     }
