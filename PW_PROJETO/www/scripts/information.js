@@ -62,8 +62,9 @@ class Information {
     };
 
     /*Edita uma tarefa*/
-    updateTasks(id) {
-        let input = prompt("Ex:  TEXTO|DATA");
+    updateTasks(id, text, date) {
+
+        let input = prompt("Editar Tarefa:", text + "|" + date);
         let editedTask = input.split('|');
 
         if (!input || !input.includes('|')) {
@@ -117,8 +118,6 @@ class Information {
         //Guarda o array no localStorage
         let data = JSON.stringify(this.tasks);
         localStorage.setItem("tarefas", data);
-
-        console.log(this.tasks);
 
         this.showTasks();//Atualiza a tabela
 

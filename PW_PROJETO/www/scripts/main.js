@@ -63,7 +63,7 @@ function tableLine(task) {
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function() {
-        window.info.updateTasks(task.id); // Automatically pass the task id to edit it
+        window.info.updateTasks(task.id, task.taskContent, task.taskDate); // Automatically pass the task id to edit it
     });
     editBtn.className = "editTaskButton";
 
