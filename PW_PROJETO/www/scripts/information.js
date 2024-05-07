@@ -114,7 +114,14 @@ class Information {
         let data = JSON.stringify(this.tasks);
         localStorage.setItem("tarefas", data);
 
+        console.log(this.tasks);
+
         this.showTasks();//Atualiza a tabela
+
+        //Se o array for vazio, nao mostra nenhum tipo de informação (HTML)
+        if (this.tasks.length == 0) {
+            document.getElementById("mainInformation").style.display = "none";
+        }
     }
 
 }
