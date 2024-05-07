@@ -19,11 +19,11 @@ function generateMockupdateTask() {
 
 
 function tableLine(task) {
-    var li = document.createElement("li");
-    
     var detailsDiv = document.createElement("div");
     detailsDiv.style.display = "inline-block";
-    
+
+    var li = document.createElement("li");
+
     for (var property in task) {
         if (task.hasOwnProperty(property) && property !== 'id') {
             var span = document.createElement("span");

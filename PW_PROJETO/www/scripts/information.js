@@ -41,7 +41,8 @@ class Information {
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
 
-        if ((taskText == "") || (taskDate == "")) {
+        //Verifica se o texto e a data não estão preenchidos só com espaços
+        if ((taskText.trim() === "") || (taskDate.trim() === "")) {
             alert("Preencha os campos!!");
             return;
         }
@@ -59,8 +60,26 @@ class Information {
         let input = prompt("Ex:  TEXTO|DATA");
         let editedTask = input.split('|');
 
-        let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
+        if (!input || !input.includes('|')) {
+            alert("Preencha com dados válidos!");
+            return;
+        }
 
+        //Verifica se o input está correto
+        if (editedTask.length !== 2 || editedTask[0].trim() === '' || editedTask[1].trim() === '') {
+            alert("Preencha com dados válidos!");
+            return;
+        }
+
+        const dateFormat = /^\d{4}-\d{2}-\d{2}$/; //Padrao do formato data (yyyy-mm-dd)
+
+        //Verifica se o padrão é diferente do input
+        if (!dateFormat.test(editedTask[1].trim())) {
+            alert("A data deve estar no formato aaaa-mm-dd!");
+            return;
+        }
+
+        let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
         taskToUpdate.taskContent = editedTask[0]; //Edita o texto
         taskToUpdate.taskDate = editedTask[1]; //Edita a data
 
