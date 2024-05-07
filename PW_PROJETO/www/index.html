@@ -27,10 +27,10 @@
 
     <div class="backGround"></div>
     <form id="form" class="formContainer" onsubmit="info.addTasks(); return false;">
-        <h1>Adicionar Tarefa</h1>
+        <h1 id="tarefaTitle">Adicionar Tarefa</h1>
         <div class="inputContainer">
             <input type="text" id="taskInput" placeholder="Nova tarefa ...">
-            <button class="addTaskButton" type="submit" title="Adicionar Tarefa">&#43;</button>
+            <button id="taskButton" class="addTaskButton" type="submit" title="Adicionar Tarefa">&#43;</button>
         </div>
         <input type="date" id="taskDate">
     </form>

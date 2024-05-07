@@ -1,4 +1,3 @@
-
 "use strict";
 
 /** 
@@ -126,5 +125,24 @@ class Information {
             document.getElementById("mainInformation").style.display = "none";
         }
     }
+
+    /*testeEdit(id, text, date){
+        document.getElementById("tarefaTitle").textContent = "Editar Tarefa"
+
+        var taskText = document.getElementById("taskInput").value = text;
+        var taskDate = document.getElementById("taskDate").value = date;
+
+        document.getElementById("mainInformation").style.display = "none";
+
+        var editButton = document.getElementById("taskButton");
+        editButton.innerHTML = "&#x2713;"
+        editButton.title = "Editar Tarefa";
+        editButton.addEventListener("click", function() {
+            updateTasks(id, taskText, taskDate); // Automatically pass the task id to edit it
+            this.upda
+        });
+
+        //this.updateTasks(id, taskText, taskDate);
+    }*/
 
 }
