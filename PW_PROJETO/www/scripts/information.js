@@ -87,9 +87,24 @@ class Information {
     };
 
     /*Remove uma tarefa*/
-    removeTasks() {
-        /*TODO - Remover Tarefas*/
-        console.log("REMOVE");
+    removeTasks(id) {
+        let indexToRemove = this.tasks.findIndex(task => task.id === id); // Encontra o índice da tarefa pelo ID
 
-    };
+        if (indexToRemove !== -1) {
+            this.tasks.splice(indexToRemove, 1); // Remove a tarefa do array
+
+            //Ajusta os IDs das tarefas
+            for (let i = 0; i < this.tasks.length; i++) {
+                //Decrementa o ID de todas as tarefas cujo ID é maior que o ID da tarefa a ser removida
+                if (this.tasks[i].id > id) {
+                    this.tasks[i].id--;
+                }
+            }
+        } else {
+            alert("Tarefa não encontrada!");
+        }
+
+        this.showTasks();//Atualiza a tabela
+    }
+
 }
