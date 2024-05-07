@@ -101,7 +101,7 @@ class Information {
                 }
             }
         } else {
-            alert("Tarefa não encontrada!");
+            alert("Tarefa não encontrada!!");
         }
 
         this.showTasks();//Atualiza a tabela
