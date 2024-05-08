@@ -76,7 +76,3 @@ function tableLine(task) {
 
     return li;
 }
-
-
-
-
