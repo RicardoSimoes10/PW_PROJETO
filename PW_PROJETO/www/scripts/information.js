@@ -45,11 +45,11 @@ class Information {
 
     /*Adiciona uma tarefa*/
     addTasks() {
+        event.preventDefault();
         console.log("add");
         let taskId = this.tasks.length + 1;
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
-
 
         //Verifica se o texto e a data não estão preenchidos só com espaços
         if ((taskText.trim() === "") || (taskDate.trim() === "")) {
@@ -73,46 +73,34 @@ class Information {
 
     /*Edita uma tarefa*/
     updateTasks(id) {
-        console.log(id);
+        event.preventDefault();
 
         var editText = document.getElementById("editTaskInput").value;
         var editDate = document.getElementById("editTaskDate").value;
 
-        /*let input = prompt("Editar Tarefa:", text + "|" + date);
-        let editedTask = input.split('|');
-
-        if (!input || !input.includes('|')) {
-            alert("Preencha com dados válidos!");
+        if (editText === "" || editDate === "") {
+            alert("Preencha todos os campos!!");
             return;
         }
 
         //Verifica se o input está correto
-        if (text.length !== 2 || text.trim() === '' || text.trim() === '') {
-            alert("Preencha com dados válidos!");
+        if (editText.length !== 2 || editText.trim() === '' || editText.trim() === '') {
+            alert("Preencha os campos!!");
             return;
         }
 
-        const dateFormat = /^\d{4}-\d{2}-\d{2}$/; //Padrao do formato data (yyyy-mm-dd)
-
-        //Verifica se o padrão é diferente do input
-        if (!dateFormat.test(date.trim())) {
-            alert("A data deve estar no formato aaaa-mm-dd!");
-            return;
-        }*/
-
-        console.log(editText);
-        console.log(editDate);
-
-        let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
-        taskToUpdate.taskContent = editText; //Edita o texto
-        taskToUpdate.taskDate = editDate; //Edita a data
+        //UPDATE
+        let taskToUpdate = this.tasks.find(task => task.id === parseInt(id)); //Encontra a tarefa pelo o ID
+        taskToUpdate.taskContent = editText;
+        taskToUpdate.taskDate = editDate;
 
         //Guarda o array no localStorage
         let data = JSON.stringify(this.tasks);
         localStorage.setItem("tarefas", data);
 
         this.showTasks(); //Atualiza a tabela
-    };
+    }
+
 
     /*Remove uma tarefa*/
     removeTasks(id) {
@@ -144,15 +132,21 @@ class Information {
         }
     }
 
-    testeEdit(id, text, date) {
+    callEdit(id, text, date) {
         document.getElementById("editTaskInput").value = text;
         document.getElementById("editTaskDate").value = date;
+        document.getElementById("editTaskId").value = id;
 
         document.getElementById("mainInformation").style.display = "none";
-
         document.getElementById("editForm").style.display = "block";
         document.getElementById("addForm").style.display = "none";
 
-        window.callEdit(id);
+        /*var form = document.getElementById("editForm");
+
+        function editSubmit(event) {
+            event.preventDefault();
+            info.updateTasks(id); // Call updateTasks with the passed id
+        }
+        form.addEventListener("submit", editSubmit);*/
     }
 }

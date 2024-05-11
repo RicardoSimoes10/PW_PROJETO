@@ -8,29 +8,8 @@
 window.onload = function (event) {
     var info = new Information("mainInformation");
     window.info = info;
-    //generateMockupdateTask();
     loadData();
-    //callEdit();
 };
-
-function generateMockupdateTask() {
-    info.tasks.push(new Tarefa(1, "teste1 teste1 teste1 teste1", "2000-12-20"));
-    info.tasks.push(new Tarefa(2, "teste2", "2000-12-20"));
-    info.tasks.push(new Tarefa(3, "teste3", "2000-12-20"));
-}
-
-function callEdit(id) {
-    console.log("ID: " + id);
-    var form = document.getElementById("editForm");
-    form.removeEventListener("submit", editSubmit);
-    function editSubmit(event) {
-        event.preventDefault();
-        window.info.updateTasks(id);
-        id="";
-    }
-    form.addEventListener("submit", editSubmit);
-}
-
 
 function loadData() {
     window.info.tasks = JSON.parse(localStorage.getItem("tarefas"));
@@ -67,7 +46,7 @@ function tableLine(task) {
     deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", function () {
-        window.info.removeTasks(task.id); // Automatically pass the task id to remove it
+        window.info.removeTasks(task.id);
     });
     deleteBtn.className = "removeTaskButton";
 
@@ -76,16 +55,15 @@ function tableLine(task) {
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function () {
-        window.info.testeEdit(task.id, task.taskContent, task.taskDate); // Automatically pass the task id to edit it
+        window.info.callEdit(task.id, task.taskContent, task.taskDate);
     });
     editBtn.className = "editTaskButton";
 
-    // Add buttons to the div
     buttonDiv.appendChild(deleteBtn);
     buttonDiv.appendChild(editBtn);
 
-    li.appendChild(detailsDiv); // Add the div with text and date to the list
-    li.appendChild(buttonDiv); // Add the div with buttons to the list
+    li.appendChild(detailsDiv);
+    li.appendChild(buttonDiv);
 
     return li;
 }
