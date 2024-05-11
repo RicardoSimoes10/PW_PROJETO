@@ -10,7 +10,7 @@ window.onload = function (event) {
     window.info = info;
     //generateMockupdateTask();
     loadData();
-    callEdit();
+    //callEdit();
 };
 
 function generateMockupdateTask() {
@@ -22,12 +22,13 @@ function generateMockupdateTask() {
 function callEdit(id) {
     console.log("ID: " + id);
     var form = document.getElementById("editForm");
-    //form.removeEventListener("submit", handleUpdateSubmit);
+    form.removeEventListener("submit", editSubmit);
     function editSubmit(event) {
         event.preventDefault();
         window.info.updateTasks(id);
-      }
-      form.addEventListener("submit", editSubmit);
+        id="";
+    }
+    form.addEventListener("submit", editSubmit);
 }
 
 

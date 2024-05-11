@@ -50,6 +50,7 @@ class Information {
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
 
+
         //Verifica se o texto e a data não estão preenchidos só com espaços
         if ((taskText.trim() === "") || (taskDate.trim() === "")) {
             alert("Preencha os campos!!");
@@ -101,7 +102,7 @@ class Information {
 
         console.log(editText);
         console.log(editDate);
-        
+
         let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
         taskToUpdate.taskContent = editText; //Edita o texto
         taskToUpdate.taskDate = editDate; //Edita a data
@@ -146,12 +147,12 @@ class Information {
     testeEdit(id, text, date) {
         document.getElementById("editTaskInput").value = text;
         document.getElementById("editTaskDate").value = date;
-    
+
         document.getElementById("mainInformation").style.display = "none";
-    
+
         document.getElementById("editForm").style.display = "block";
         document.getElementById("addForm").style.display = "none";
-    
+
         window.callEdit(id);
     }
 }
