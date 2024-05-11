@@ -22,20 +22,26 @@ function tableLine(task) {
 
     var li = document.createElement("li");
 
+    // Itera sobre as propriedades da tarefa
     for (var property in task) {
+        // Verifica se a propriedade pertence diretamente ao objeto e não é 'id'
         if (task.hasOwnProperty(property) && property !== 'id') {
             var span = document.createElement("span");
             span.textContent = task[property];
 
+            // Personaliza a aparência com base na propriedade
             if (property === 'taskText') {
                 span.style.fontSize = "inherit";
             } else if (property === 'taskDate') {
                 span.style.fontSize = "11px";
             }
+
+            // Adiciona o elemento <span> e uma quebra de linha ao detalhamento da div
             detailsDiv.appendChild(span);
             detailsDiv.appendChild(document.createElement("br"));
         }
     }
+
 
     //Cria uma div para os buttons
     var buttonDiv = document.createElement("div");

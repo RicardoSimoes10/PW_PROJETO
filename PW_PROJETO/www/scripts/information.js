@@ -17,6 +17,7 @@ class Information {
 
     /*Mostra todas as tarefas*/
     showTasks() {
+        //Verifica se existe tarefas
         if (this.tasks != "") {
             document.getElementById("tituloListaTarefas").style.display = "block";
             document.getElementById(this.id).style.display = "block";
@@ -25,7 +26,7 @@ class Information {
         document.getElementById("editForm").style.display = "none";
         document.getElementById("addForm").style.display = "block";
 
-        document.getElementById("tarefaTitle").textContent = "Adicionar Tarefa"; //Muda o titulo
+        document.getElementById("tarefaTitle").textContent = "Adicionar Tarefa";
 
         //Limpa os inputs depois de editar a tarefa
         document.getElementById("taskInput").value = "";
