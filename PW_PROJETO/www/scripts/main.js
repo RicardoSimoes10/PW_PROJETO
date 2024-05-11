@@ -8,11 +8,18 @@
 window.onload = function (event) {
     var info = new Information("mainInformation");
     window.info = info;
+    addTasks();
     loadData();
 };
 
 function loadData() {
     window.info.tasks = JSON.parse(localStorage.getItem("tarefas")); //Carrega as tarefas guardadas no localStorage
+}
+
+function addTasks(){
+    info.tasks.push(new Tarefa(1, "teste1", "2000-12-21"));
+    info.tasks.push(new Tarefa(2, "teste2", "2000-12-21"));
+    info.tasks.push(new Tarefa(3, "teste3", "2000-12-21"));
 }
 
 
@@ -21,42 +28,35 @@ function tableLine(task) {
     detailsDiv.style.display = "inline-block";
 
     var li = document.createElement("li");
+    li.className = "task-item";
 
-    // Itera sobre as propriedades da tarefa
+    
     for (var property in task) {
-        // Verifica se a propriedade pertence diretamente ao objeto e não é 'id'
         if (task.hasOwnProperty(property) && property !== 'id') {
             var span = document.createElement("span");
             span.textContent = task[property];
-
-            // Personaliza a aparência com base na propriedade
             if (property === 'taskText') {
                 span.style.fontSize = "inherit";
             } else if (property === 'taskDate') {
                 span.style.fontSize = "11px";
             }
-
-            // Adiciona o elemento <span> e uma quebra de linha ao detalhamento da div
             detailsDiv.appendChild(span);
             detailsDiv.appendChild(document.createElement("br"));
         }
     }
 
-
-    //Cria uma div para os buttons
     var buttonDiv = document.createElement("div");
     buttonDiv.className = "divButtonEditRemove";
 
-    //Cria um button para remover
     var deleteBtn = document.createElement("button");
     deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", function () {
+        //li.style.animation = "fadeOut 0.5s ease forwards";
         window.info.removeTasks(task.id);
     });
     deleteBtn.className = "removeTaskButton";
 
-    //Cria um button para editar
     var editBtn = document.createElement("button");
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
@@ -65,11 +65,9 @@ function tableLine(task) {
     });
     editBtn.className = "editTaskButton";
 
-    //Adiciona os buttons à div
     buttonDiv.appendChild(deleteBtn);
     buttonDiv.appendChild(editBtn);
 
-    //Adiciona as divs à lista
     li.appendChild(detailsDiv);
     li.appendChild(buttonDiv);
 

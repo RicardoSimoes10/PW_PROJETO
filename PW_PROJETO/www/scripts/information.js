@@ -84,7 +84,7 @@ class Information {
     /*Edita uma tarefa*/
     updateTasks(id) {
         event.preventDefault();
-
+        
         var editText = document.getElementById("editTaskInput").value;
         var editDate = document.getElementById("editTaskDate").value;
 
