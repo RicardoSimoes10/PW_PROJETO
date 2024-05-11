@@ -19,7 +19,7 @@ function generateMockupdateTask() {
 }
 
 
-function loadData(){
+function loadData() {
     window.info.tasks = JSON.parse(localStorage.getItem("tarefas"));
 }
 
@@ -34,7 +34,7 @@ function tableLine(task) {
         if (task.hasOwnProperty(property) && property !== 'id') {
             var span = document.createElement("span");
             span.textContent = task[property];
-            
+
             if (property === 'taskText') {
                 span.style.fontSize = "inherit";
             } else if (property === 'taskDate') {
@@ -44,7 +44,7 @@ function tableLine(task) {
             detailsDiv.appendChild(document.createElement("br"));
         }
     }
-    
+
     // Create a div for the buttons
     var buttonDiv = document.createElement("div");
     buttonDiv.className = "divButtonEditRemove";
@@ -53,7 +53,7 @@ function tableLine(task) {
     var deleteBtn = document.createElement("button");
     deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
-    deleteBtn.addEventListener("click", function() {
+    deleteBtn.addEventListener("click", function () {
         window.info.removeTasks(task.id); // Automatically pass the task id to remove it
     });
     deleteBtn.className = "removeTaskButton";
@@ -62,7 +62,7 @@ function tableLine(task) {
     var editBtn = document.createElement("button");
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", function() {
+    editBtn.addEventListener("click", function () {
         window.info.updateTasks(task.id, task.taskContent, task.taskDate); // Automatically pass the task id to edit it
     });
     editBtn.className = "editTaskButton";

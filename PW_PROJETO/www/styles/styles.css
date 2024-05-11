@@ -60,7 +60,17 @@ body {
 }
 
 /*Container com o formulario*/
-.formContainer {
+.addFormContainer {
+    max-width: 700px;
+    margin: -250px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: .4s;
+    display: none;
+}
+
+.editFormContainer {
     max-width: 700px;
     margin: -250px auto;
     padding: 20px;
