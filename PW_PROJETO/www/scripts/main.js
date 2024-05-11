@@ -12,7 +12,7 @@ window.onload = function (event) {
 };
 
 function loadData() {
-    window.info.tasks = JSON.parse(localStorage.getItem("tarefas"));
+    window.info.tasks = JSON.parse(localStorage.getItem("tarefas")); //Carrega as tarefas guardadas no localStorage
 }
 
 
@@ -37,11 +37,11 @@ function tableLine(task) {
         }
     }
 
-    // Create a div for the buttons
+    //Cria uma div para os buttons
     var buttonDiv = document.createElement("div");
     buttonDiv.className = "divButtonEditRemove";
 
-    // Create a button to remove 
+    //Cria um button para remover
     var deleteBtn = document.createElement("button");
     deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
@@ -50,7 +50,7 @@ function tableLine(task) {
     });
     deleteBtn.className = "removeTaskButton";
 
-    // Create a button to edit 
+    //Cria um button para editar
     var editBtn = document.createElement("button");
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
@@ -59,9 +59,11 @@ function tableLine(task) {
     });
     editBtn.className = "editTaskButton";
 
+    //Adiciona os buttons à div
     buttonDiv.appendChild(deleteBtn);
     buttonDiv.appendChild(editBtn);
 
+    //Adiciona as divs à lista
     li.appendChild(detailsDiv);
     li.appendChild(buttonDiv);
 

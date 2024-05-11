@@ -57,6 +57,15 @@ class Information {
             return;
         }
 
+        let currentDate = new Date(); // Current system date
+        let inputDate = new Date(taskDate); // Date from the input field
+
+        // Verifica se a data da tarefa é anterior à data atual
+        if (inputDate < currentDate) {
+            alert("A data da tarefa não pode ser anterior à data atual!");
+            return;
+        }
+
         let newTask = new Tarefa(taskId, taskText, taskDate);
         this.tasks.unshift(newTask);
 
@@ -78,14 +87,19 @@ class Information {
         var editText = document.getElementById("editTaskInput").value;
         var editDate = document.getElementById("editTaskDate").value;
 
-        if (editText === "" || editDate === "") {
+        
+        //Verifica se o input está correto
+        if (editText.trim() === '' || editText.trim() === '' || editDate === '') {
             alert("Preencha todos os campos!!");
             return;
         }
 
-        //Verifica se o input está correto
-        if (editText.length !== 2 || editText.trim() === '' || editText.trim() === '') {
-            alert("Preencha os campos!!");
+        let currentDate = new Date(); // Data atual do sistema
+        let inputDate = new Date(editDate); // Data introduzida
+
+        // Verifica se a data da tarefa é anterior à data atual
+        if (inputDate < currentDate) {
+            alert("A data da tarefa não pode ser anterior à data atual!");
             return;
         }
 
@@ -116,9 +130,9 @@ class Information {
                     this.tasks[i].id--;
                 }
             }
-        } else {
+        } 
+        else
             alert("Tarefa não encontrada!!");
-        }
 
         //Guarda o array no localStorage
         let data = JSON.stringify(this.tasks);
@@ -140,13 +154,5 @@ class Information {
         document.getElementById("mainInformation").style.display = "none";
         document.getElementById("editForm").style.display = "block";
         document.getElementById("addForm").style.display = "none";
-
-        /*var form = document.getElementById("editForm");
-
-        function editSubmit(event) {
-            event.preventDefault();
-            info.updateTasks(id); // Call updateTasks with the passed id
-        }
-        form.addEventListener("submit", editSubmit);*/
     }
 }
