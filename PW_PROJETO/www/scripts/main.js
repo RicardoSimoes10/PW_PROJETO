@@ -10,12 +10,24 @@ window.onload = function (event) {
     window.info = info;
     //generateMockupdateTask();
     loadData();
+    callEdit();
 };
 
 function generateMockupdateTask() {
     info.tasks.push(new Tarefa(1, "teste1 teste1 teste1 teste1", "2000-12-20"));
     info.tasks.push(new Tarefa(2, "teste2", "2000-12-20"));
     info.tasks.push(new Tarefa(3, "teste3", "2000-12-20"));
+}
+
+function callEdit(id) {
+    console.log("ID: " + id);
+    var form = document.getElementById("editForm");
+    //form.removeEventListener("submit", handleUpdateSubmit);
+    function editSubmit(event) {
+        event.preventDefault();
+        window.info.updateTasks(id);
+      }
+      form.addEventListener("submit", editSubmit);
 }
 
 
@@ -63,7 +75,7 @@ function tableLine(task) {
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function () {
-        window.info.updateTasks(task.id, task.taskContent, task.taskDate); // Automatically pass the task id to edit it
+        window.info.testeEdit(task.id, task.taskContent, task.taskDate); // Automatically pass the task id to edit it
     });
     editBtn.className = "editTaskButton";
 

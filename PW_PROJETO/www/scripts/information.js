@@ -22,6 +22,15 @@ class Information {
             document.getElementById(this.id).style.display = "block";
         }
 
+        document.getElementById("editForm").style.display = "none";
+        document.getElementById("addForm").style.display = "block";
+
+        document.getElementById("tarefaTitle").textContent = "Adicionar Tarefa"; //Muda o titulo
+
+        //Limpa os inputs depois de editar a tarefa
+        document.getElementById("taskInput").value = "";
+        document.getElementById("taskDate").value = "";
+
         document.getElementById("addForm").style.display = "block";
         document.getElementById("information").innerHTML = "";
 
@@ -36,6 +45,7 @@ class Information {
 
     /*Adiciona uma tarefa*/
     addTasks() {
+        console.log("add");
         let taskId = this.tasks.length + 1;
         let taskText = document.getElementById("taskInput").value;
         let taskDate = document.getElementById("taskDate").value;
@@ -61,9 +71,13 @@ class Information {
     };
 
     /*Edita uma tarefa*/
-    updateTasks(id, text, date) {
+    updateTasks(id) {
+        console.log(id);
 
-        let input = prompt("Editar Tarefa:", text + "|" + date);
+        var editText = document.getElementById("editTaskInput").value;
+        var editDate = document.getElementById("editTaskDate").value;
+
+        /*let input = prompt("Editar Tarefa:", text + "|" + date);
         let editedTask = input.split('|');
 
         if (!input || !input.includes('|')) {
@@ -72,7 +86,7 @@ class Information {
         }
 
         //Verifica se o input está correto
-        if (editedTask.length !== 2 || editedTask[0].trim() === '' || editedTask[1].trim() === '') {
+        if (text.length !== 2 || text.trim() === '' || text.trim() === '') {
             alert("Preencha com dados válidos!");
             return;
         }
@@ -80,14 +94,17 @@ class Information {
         const dateFormat = /^\d{4}-\d{2}-\d{2}$/; //Padrao do formato data (yyyy-mm-dd)
 
         //Verifica se o padrão é diferente do input
-        if (!dateFormat.test(editedTask[1].trim())) {
+        if (!dateFormat.test(date.trim())) {
             alert("A data deve estar no formato aaaa-mm-dd!");
             return;
-        }
+        }*/
 
+        console.log(editText);
+        console.log(editDate);
+        
         let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
-        taskToUpdate.taskContent = editedTask[0]; //Edita o texto
-        taskToUpdate.taskDate = editedTask[1]; //Edita a data
+        taskToUpdate.taskContent = editText; //Edita o texto
+        taskToUpdate.taskDate = editDate; //Edita a data
 
         //Guarda o array no localStorage
         let data = JSON.stringify(this.tasks);
@@ -126,164 +143,15 @@ class Information {
         }
     }
 
-    /*testeEdit(id, text, date){
-        document.getElementById("tarefaTitle").textContent = "Editar Tarefa"
-
-        var taskText = document.getElementById("taskInput").value = text;
-        var taskDate = document.getElementById("taskDate").value = date;
-
+    testeEdit(id, text, date) {
+        document.getElementById("editTaskInput").value = text;
+        document.getElementById("editTaskDate").value = date;
+    
         document.getElementById("mainInformation").style.display = "none";
-
-        var editButton = document.getElementById("taskButton");
-        editButton.innerHTML = "&#x2713;"
-        editButton.title = "Editar Tarefa";
-        editButton.addEventListener("click", function() {
-            updateTasks(id, taskText, taskDate); // Automatically pass the task id to edit it
-            this.upda
-        });
-
-        //this.updateTasks(id, taskText, taskDate);
-    }*/
-}
-
-
-/*class Information {
-    constructor(id) {
-        this.id = id;
-        this.tasks = [];
-    }
-
     
-    showTasks() {
-        if (this.tasks != "") {
-            document.getElementById("tituloListaTarefas").style.display = "block";
-            document.getElementById(this.id).style.display = "block";
-        }
-
-        document.getElementById("addForm").style.display = "block";
-        document.getElementById("editForm").style.display = "none";
-        document.getElementById("information").innerHTML = "";
-
-        let lista = document.getElementById("information");
-        this.tasks.forEach(task => {
-            let li = tableLine(task);
-            lista.appendChild(li);
-        });
-        document.getElementById("taskListDivInformation").replaceChildren(lista);
-    }
-
-
-    
-    addTasks() {
-        console.log("2");
-        let taskId = this.tasks.length + 1;
-        let taskText = document.getElementById("taskInput").value;
-        let taskDate = document.getElementById("taskDate").value;
-
-        //Verifica se o texto e a data não estão preenchidos só com espaços
-        if ((taskText.trim() === "") || (taskDate.trim() === "")) {
-            alert("Preencha os campos!!");
-            return;
-        }
-
-        let newTask = new Tarefa(taskId, taskText, taskDate);
-        this.tasks.unshift(newTask);
-
-        //Guarda o array no localStorage
-        let data = JSON.stringify(this.tasks);
-        localStorage.setItem("tarefas", data);
-
-        this.showTasks(); //Atualiza a tabela
-
-        //Limpa os inputs depois de adicionar tarefa
-        document.getElementById("taskInput").value = "";
-        document.getElementById("taskDate").value = "";
-    };
-
-    
-    updateTasks(id, text, date) {
-        //let input = prompt("Editar Tarefa:", text + "|" + date);
-        //let editedTask = input.split('|');
-
-        /*if (!input || !input.includes('|')) {
-            alert("Preencha com dados válidos!");
-            return;
-        }
-        console.log("EDIT");
-        console.log(text);
-        console.log(date);
-
-        
-
-        var taskText = document.getElementById("editTaskInput").value = text;
-        var taskDate = document.getElementById("editTaskDate").value = date;
-
-        //Verifica se o input está correto
-        if (text == "") {
-            alert("Preencha com dados válidos!");
-            return;
-        }
-
-        const dateFormat = /^\d{4}-\d{2}-\d{2}$/; //Padrao do formato data (yyyy-mm-dd)
-
-        //Verifica se o padrão é diferente do input
-        if (!dateFormat.test(taskDate.trim())) {
-            alert("A data deve estar no formato aaaa-mm-dd!");
-            return;
-        }
-
-        let taskToUpdate = this.tasks.find(task => task.id === id); //Encontra a tarefa pelo o ID
-        taskToUpdate.taskContent = taskText; //Edita o texto
-        taskToUpdate.taskDate = taskDate; //Edita a data
-
-        //Guarda o array no localStorage
-        let data = JSON.stringify(this.tasks);
-        localStorage.setItem("tarefas", data);
-
-        this.showTasks(); //Atualiza a tabela
-    };
-
-    
-    removeTasks(id) {
-        let indexToRemove = this.tasks.findIndex(task => task.id === id); // Encontra o índice da tarefa pelo ID
-
-        if (indexToRemove !== -1) {
-            this.tasks.splice(indexToRemove, 1); // Remove a tarefa do array
-
-            //Ajusta os IDs das tarefas
-            for (let i = 0; i < this.tasks.length; i++) {
-                //Decrementa o ID de todas as tarefas cujo ID é maior que o ID da tarefa a ser removida
-                if (this.tasks[i].id > id) {
-                    this.tasks[i].id--;
-                }
-            }
-        } else {
-            alert("Tarefa não encontrada!!");
-        }
-
-        //Guarda o array no localStorage
-        let data = JSON.stringify(this.tasks);
-        localStorage.setItem("tarefas", data);
-
-        this.showTasks();//Atualiza a tabela
-
-        //Se o array for vazio, nao mostra nenhum tipo de informação (HTML)
-        if (this.tasks.length == 0) {
-            document.getElementById("mainInformation").style.display = "none";
-        }
-    }
-
-    testEdit(id, text, date){
         document.getElementById("editForm").style.display = "block";
         document.getElementById("addForm").style.display = "none";
-        document.getElementById("mainInformation").style.display = "none";
-
-        document.getElementById("tarefaTitle").textContent = "Editar Tarefa"
-
-        var taskText = document.getElementById("editTaskInput").value = text;
-        var taskDate = document.getElementById("editTaskDate").value = date;
-
-        document.getElementById("mainInformation").style.display = "none";
+    
+        window.callEdit(id);
     }
 }
-*/
