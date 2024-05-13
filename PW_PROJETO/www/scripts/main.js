@@ -8,7 +8,7 @@
 window.onload = function (event) {
     var info = new Information("mainInformation");
     window.info = info;
-    addTasks();
+    //addTasks();
     loadData();
 };
 

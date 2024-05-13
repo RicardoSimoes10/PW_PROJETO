@@ -31,6 +31,16 @@ function router(request) {
     return path.join(__dirname, opt.default.folder, pathname);
 }
 
+function saveTasksToFile(tasks, filePath) {
+    fs.writeFile(filePath, JSON.stringify(tasks), (err) => {
+        if (err) {
+            console.error('Error saving tasks to file:', err);
+        } else {
+            console.log('Tasks saved to file successfully.');
+        }
+    });
+}
+
 const server = http.createServer( (request, response) => {
     console.log(`Request for ${request.url} received.`);
     const filename = router(request);
@@ -50,3 +60,13 @@ const server = http.createServer( (request, response) => {
 server.listen(opt.default.port, () => {
     console.log(`Running at http://localhost:${opt.default.port}`)
 });
+
+
+
+const tasks = [
+    { id: 1, name: 'Task 1', status: 'pending' },
+    { id: 2, name: 'Task 2', status: 'completed' }
+];
+
+const filePath = 'tasks.json';
+saveTasksToFile(tasks, filePath);
