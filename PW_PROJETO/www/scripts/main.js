@@ -1,5 +1,4 @@
 "use strict";
-
 /**
  * Função que será executada quando a página estiver toda carregada, criando a variável global "info" com um objeto Information
  * @memberof window
@@ -16,7 +15,7 @@ function loadData() {
     window.info.tasks = JSON.parse(localStorage.getItem("tarefas")); //Carrega as tarefas guardadas no localStorage
 }
 
-function addTasks(){
+function addTasks() {
     info.tasks.push(new Tarefa(1, "teste1", "2000-12-21"));
     info.tasks.push(new Tarefa(2, "teste2", "2000-12-21"));
     info.tasks.push(new Tarefa(3, "teste3", "2000-12-21"));
@@ -30,7 +29,7 @@ function tableLine(task) {
     var li = document.createElement("li");
     li.className = "task-item";
 
-    
+
     for (var property in task) {
         if (task.hasOwnProperty(property) && property !== 'id') {
             var span = document.createElement("span");

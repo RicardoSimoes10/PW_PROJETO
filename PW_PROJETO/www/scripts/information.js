@@ -1,5 +1,4 @@
 "use strict";
-
 /** 
 * @class Guarda toda informação necessaria na execução do exercicio 
 * @constructs Informacao
@@ -70,6 +69,16 @@ class Information {
         let newTask = new Tarefa(taskId, taskText, taskDate);
         this.tasks.unshift(newTask);
 
+        
+
+        /*this.tasks = require("../../tasks.json");
+        console.log(this.tasks);
+
+        const testlistJson = JSON.stringify(testlist);
+        fs.writeFileSync("../../tasks.json", testlistJson, "utf8");*/
+
+        console.log(testlistJson);
+
         //Guarda o array no localStorage
         let data = JSON.stringify(this.tasks);
         localStorage.setItem("tarefas", data);
@@ -84,11 +93,11 @@ class Information {
     /*Edita uma tarefa*/
     updateTasks(id) {
         event.preventDefault();
-        
+
         var editText = document.getElementById("editTaskInput").value;
         var editDate = document.getElementById("editTaskDate").value;
 
-        
+
         //Verifica se o input está correto
         if (editText.trim() === '' || editText.trim() === '' || editDate === '') {
             alert("Preencha todos os campos!!");
@@ -126,12 +135,11 @@ class Information {
 
             //Ajusta os IDs das tarefas
             for (let i = 0; i < this.tasks.length; i++) {
-                //Decrementa o ID de todas as tarefas cujo ID é maior que o ID da tarefa a ser removida
                 if (this.tasks[i].id > id) {
                     this.tasks[i].id--;
                 }
             }
-        } 
+        }
         else
             alert("Tarefa não encontrada!!");
 
