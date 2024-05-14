@@ -77,7 +77,7 @@ class Information {
         const testlistJson = JSON.stringify(testlist);
         fs.writeFileSync("../../tasks.json", testlistJson, "utf8");*/
 
-        console.log(testlistJson);
+        //console.log(testlistJson);
 
         //Guarda o array no localStorage
         let data = JSON.stringify(this.tasks);
