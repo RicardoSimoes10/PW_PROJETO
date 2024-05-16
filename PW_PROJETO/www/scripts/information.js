@@ -42,90 +42,6 @@ class Information {
         document.getElementById("taskListDivInformation").replaceChildren(lista);
     }
 
-
-    /*Adiciona uma tarefa*/
-    addTasks() {
-        event.preventDefault();
-        console.log("add");
-        let taskId = this.tasks.length + 1;
-        let taskText = document.getElementById("taskInput").value;
-        let taskDate = document.getElementById("taskDate").value;
-
-        //Verifica se o texto e a data não estão preenchidos só com espaços
-        if ((taskText.trim() === "") || (taskDate.trim() === "")) {
-            alert("Preencha os campos!!");
-            return;
-        }
-
-        let currentDate = new Date(); // Current system date
-        let inputDate = new Date(taskDate); // Date from the input field
-
-        // Verifica se a data da tarefa é anterior à data atual
-        if (inputDate < currentDate) {
-            alert("A data da tarefa não pode ser anterior à data atual!");
-            return;
-        }
-
-        let newTask = new Tarefa(taskId, taskText, taskDate);
-        this.tasks.unshift(newTask);
-
-        
-
-        /*this.tasks = require("../../tasks.json");
-        console.log(this.tasks);
-
-        const testlistJson = JSON.stringify(testlist);
-        fs.writeFileSync("../../tasks.json", testlistJson, "utf8");*/
-
-        console.log(testlistJson);
-
-        //Guarda o array no localStorage
-        let data = JSON.stringify(this.tasks);
-        localStorage.setItem("tarefas", data);
-
-        this.showTasks(); //Atualiza a tabela
-
-        //Limpa os inputs depois de adicionar tarefa
-        document.getElementById("taskInput").value = "";
-        document.getElementById("taskDate").value = "";
-    };
-
-    /*Edita uma tarefa*/
-    updateTasks(id) {
-        event.preventDefault();
-
-        var editText = document.getElementById("editTaskInput").value;
-        var editDate = document.getElementById("editTaskDate").value;
-
-
-        //Verifica se o input está correto
-        if (editText.trim() === '' || editText.trim() === '' || editDate === '') {
-            alert("Preencha todos os campos!!");
-            return;
-        }
-
-        let currentDate = new Date(); // Data atual do sistema
-        let inputDate = new Date(editDate); // Data introduzida
-
-        // Verifica se a data da tarefa é anterior à data atual
-        if (inputDate < currentDate) {
-            alert("A data da tarefa não pode ser anterior à data atual!");
-            return;
-        }
-
-        //UPDATE
-        let taskToUpdate = this.tasks.find(task => task.id === parseInt(id)); //Encontra a tarefa pelo o ID
-        taskToUpdate.taskContent = editText;
-        taskToUpdate.taskDate = editDate;
-
-        //Guarda o array no localStorage
-        let data = JSON.stringify(this.tasks);
-        localStorage.setItem("tarefas", data);
-
-        this.showTasks(); //Atualiza a tabela
-    }
-
-
     /*Remove uma tarefa*/
     removeTasks(id) {
         let indexToRemove = this.tasks.findIndex(task => task.id === id); // Encontra o índice da tarefa pelo ID
@@ -156,6 +72,9 @@ class Information {
     }
 
     callEdit(id, text, date) {
+        console.log(id);
+        console.log(text);
+        console.log(date);
         document.getElementById("editTaskInput").value = text;
         document.getElementById("editTaskDate").value = date;
         document.getElementById("editTaskId").value = id;

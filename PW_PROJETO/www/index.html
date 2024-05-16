@@ -9,7 +9,6 @@
     <script src="scripts/tarefa.js"></script>
     <script src="scripts/information.js"></script>
     <script src="scripts/main.js"></script>
-    <script src="../callData.js"></script>
 </head>
 
 <body>
@@ -28,22 +27,23 @@
 
     <div class="backGround"></div>
     <!--ADD FORM-->
-    <form id="addForm" class="addFormContainer" onsubmit="info.addTasks();">
+    <form id="addForm" class="addFormContainer" method="post" action="/addTask">
         <h1 id="tarefaTitle">Adicionar Tarefa</h1>
         <div class="inputContainer">
-            <input type="text" id="taskInput" placeholder="Nova tarefa ...">
+            <input type="text" id="taskInput" name="taskContent" placeholder="Nova tarefa ...">
             <button id="taskButton" class="addTaskButton" type="submit" title="Adicionar Tarefa">&#43;</button>
         </div>
-        <input type="date" id="taskDate">
+        <input type="date" id="taskDate" name="taskDate">
     </form>
     <!--EDIT FORM-->
-    <form id="editForm" class="editFormContainer" onsubmit="info.updateTasks(editTaskId.value);">
+    <form id="editForm" class="editFormContainer" method="post" action="/editTask" onsubmit="editTask(event)">
         <h1 id="tarefaTitle">Editar Tarefa</h1>
         <div class="inputContainer">
-            <input type="text" id="editTaskInput" placeholder="Editar tarefa ...">
+            <input type="text" id="editTaskInput" name="taskContent" placeholder="Editar tarefa ..." required>
             <button id="editTaskButton" class="addTaskButton" type="submit" title="Editar Tarefa">&#10003;</button>
         </div>
-        <input type="date" id="editTaskDate">
+        <input type="date" id="editTaskDate" name="taskDate" required>
+        <input type="hidden" id="editTaskId">
     </form>
     <!--SHOW TASKS-->
     <main id="mainInformation" class="container">
@@ -53,7 +53,6 @@
         </div>
     </main>
     <footer class="footer"></footer>
-    <input type="hidden" id="editTaskId">
 </body>
 
 </html>

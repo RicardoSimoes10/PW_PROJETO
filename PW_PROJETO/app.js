@@ -1,38 +1,33 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const opt = {
-    'default': { 'folder': 'www', 'document': 'index.html', 'port': 8081, 'favicon': ''},
-    'extensions': {
-        'htm': 'text/html; charset=utf-8',
-        'html': 'text/html; charset=utf-8',
-        'js': 'application/javascript; charset=utf-8',
-        'json': 'application/json; charset=utf-8',
-        'css': 'text/css; charset=utf-8',
-        'gif': 'image/gif',
-        'jpg': 'image/jpg',
-        'png': 'image/png',
-        'ico': 'image/x-icon'
-    }
-};
+// app.js
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const requestHandlers = require("./request-handlers");
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, opt.default.folder)));
+// Middleware to parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-    const filename = path.join(__dirname, opt.default.folder, req.path);
-    fs.readFile(filename, (err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(404).send('HTTP Status: 404 : NOT FOUND');
-            return;
-        }
-        res.set('Content-Type', mimeType(filename));
-        res.send(data);
-    });
+// Serve static files from the 'www' directory
+app.use(express.static("www"));
+
+// Route to handle adding tasks
+app.post("/addTask", requestHandlers.addTask);
+
+// Route to handle editing tasks
+app.post("/editTask", requestHandlers.editTask);
+
+// Redirect root URL to index.html
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "www", "index.html"));
 });
 
-app.listen(opt.default.port, () => {
-    console.log(`Running at http://localhost:${opt.default.port}`)
+//app.get("/tasks", requestHandlers.fetchTasks);
+
+// Start the server
+const PORT = process.env.PORT || 8081;
+app.listen(PORT, function () {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
