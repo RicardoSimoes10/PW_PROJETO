@@ -17,7 +17,8 @@ class Information {
     /*Mostra todas as tarefas*/
     showTasks() {
         //Verifica se existe tarefas
-        if (this.tasks != "") {
+        console.log(dados);
+        if (dados != "") {
             document.getElementById("tituloListaTarefas").style.display = "block";
             document.getElementById(this.id).style.display = "block";
         }
@@ -35,7 +36,7 @@ class Information {
         document.getElementById("information").innerHTML = "";
 
         let lista = document.getElementById("information");
-        this.tasks.forEach(task => {
+        dados.forEach(task => {
             let li = tableLine(task);
             lista.appendChild(li);
         });

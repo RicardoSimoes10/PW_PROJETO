@@ -16,7 +16,7 @@ function addTask(req, res) {
 
     // Read existing data from the JSON file
     let data = [];
-    const filePath = path.join(__dirname, 'data.json');
+    const filePath = path.join(__dirname, 'data.js');
     if (fs.existsSync(filePath)) {
         data = JSON.parse(fs.readFileSync(filePath));
     }
@@ -62,6 +62,10 @@ function editTask(req, res) {
 }
 
 function loopJSON() {
+    
+
+
+    /*
     // Read the JSON file
     fs.readFile('data.json', 'utf8', (err, data) => {
         if (err) {
@@ -77,9 +81,9 @@ function loopJSON() {
         // Loop through each object in the array
         jsonData.forEach((task, index) => {
             // Access the content and date properties of each object
-            //console.log(`Task ${index + 1}: Content - ${task.content}, Date - ${task.date}`);
+            console.log(`Task ${index + 1}: Content - ${task.content}, Date - ${task.date}`);
         });
-    });
+    });*/
 }
 
 
