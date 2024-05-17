@@ -11,13 +11,14 @@
 class Information {
     constructor(id) {
         this.id = id;
-        this.tasks = [];
     }
 
     /*Mostra todas as tarefas*/
     showTasks() {
+        this.tasks = dados; //Atribui ao array "tasks" os valores do ficheiro data.js (dados) 
+
         //Verifica se existe tarefas
-        if (dados != "") {
+        if (this.tasks != "") {
             document.getElementById("tituloListaTarefas").style.display = "block";
             document.getElementById(this.id).style.display = "block";
         }
@@ -35,7 +36,7 @@ class Information {
         document.getElementById("information").innerHTML = "";
 
         let lista = document.getElementById("information");
-        dados.forEach(task => {
+        this.tasks.forEach(task => {
             let li = tableLine(task);
             lista.appendChild(li);
         });

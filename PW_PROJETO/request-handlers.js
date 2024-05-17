@@ -50,7 +50,6 @@ function addTask(req, res) {
 function editTask(req, res) {
     // Extract task id, content, and date from the request body
     const { editTaskId, taskContent, taskDate } = req.body;
-    console.log(editTaskId);
     // Path to the data.js file inside the "www/scripts" directory
     const filePath = path.join(__dirname, 'www', 'scripts', 'data.js');
 
@@ -88,7 +87,7 @@ function editTask(req, res) {
 function removeTask(req, res) {
     // Extract task ID from the request body
     let taskId = parseInt(req.body.removeTaskId);
-    
+
     // Path to the data.js file inside the "www/scripts" directory
     const filePath = path.join(__dirname, 'www', 'scripts', 'data.js');
 
@@ -101,7 +100,7 @@ function removeTask(req, res) {
             data = JSON.parse(dataString[1]);
         }
     }
-    console.log(taskId);
+    
     // Find the index of the task with the provided ID
     const taskIndex = data.findIndex(task => task.id === taskId);
     // If the task exists, remove it from the data array
