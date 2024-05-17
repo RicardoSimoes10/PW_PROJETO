@@ -3,88 +3,126 @@
 const fs = require('fs');
 const path = require('path');
 
-// Function to add a task
+//ADD
 function addTask(req, res) {
     // Extract task content and date from the request body
     const { taskContent, taskDate } = req.body;
 
-    // Create a new task object
+    // Path to the data.js file inside the "www/scripts" directory
+    const filePath = path.join(__dirname, 'www', 'scripts', 'data.js');
+
+    // Read existing data from the JS file
+    let data = [];
+    let nextId = 1; // Initialize nextId to 1 for the first task
+    if (fs.existsSync(filePath)) {
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const dataString = fileContent.match(/const dados\s*=\s*(\[.*\]);/s);
+        if (dataString && dataString[1]) {
+            data = JSON.parse(dataString[1]);
+            // Find the highest id in the existing data
+            if (data.length > 0) {
+                const maxId = Math.max(...data.map(task => task.id));
+                nextId = maxId + 1;
+            }
+        }
+    }
+
+    // Create a new task object with an incremented id
     const newTask = {
+        id: nextId,
         content: taskContent,
         date: taskDate
     };
 
-    // Read existing data from the JSON file
-    let data = [];
-    const filePath = path.join(__dirname, 'data.json');
-    if (fs.existsSync(filePath)) {
-        data = JSON.parse(fs.readFileSync(filePath));
-    }
-
     // Add the new task to the data array
     data.push(newTask);
 
-    // Write the updated data back to the JSON file
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    // Write the updated data back to the JS file
+    const updatedDataString = `const dados = ${JSON.stringify(data, null, 2)};\n`;
+    fs.writeFileSync(filePath, updatedDataString);
 
     // Redirect back to the main page after adding the task
     res.redirect('/');
-
-    // Alternatively, you can respond with a success message or the updated tasks array
-    // res.status(200).json({ message: 'Task added successfully', tasks: data });
 }
 
+
+//EDIT
 function editTask(req, res) {
-    // Extract task ID and updated content and date from the request body
-    const { taskId, taskContent, taskDate } = req.body;
-    // Read existing data from the JSON file
-    const filePath = path.join(__dirname, 'data.json');
+    // Extract task id, content, and date from the request body
+    const { editTaskId, taskContent, taskDate } = req.body;
+    console.log(editTaskId);
+    // Path to the data.js file inside the "www/scripts" directory
+    const filePath = path.join(__dirname, 'www', 'scripts', 'data.js');
+
+    // Read existing data from the JS file
+    let data = [];
     if (fs.existsSync(filePath)) {
-        let data = JSON.parse(fs.readFileSync(filePath));
-
-        // Find the task with the given ID and update its content and date
-        const taskIndex = data.findIndex(task => task.id === taskId);
-        if (taskIndex !== -1) {
-            data[taskIndex].content = taskContent;
-            data[taskIndex].date = taskDate;
-
-            // Write the updated data back to the JSON file
-            fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-
-            // Redirect to index.html after updating the task
-            res.redirect('/index.html');
-        } else {
-            res.status(404).json({ message: 'Task not found' });
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const dataString = fileContent.match(/const dados\s*=\s*(\[.*\]);/s);
+        if (dataString && dataString[1]) {
+            data = JSON.parse(dataString[1]);
         }
+    }
+
+    // Find the index of the task with the given taskId
+    const taskIndex = data.findIndex(task => task.id === parseInt(editTaskId));
+
+    // If the task is found, update its content and date
+    if (taskIndex !== -1) {
+        data[taskIndex].content = taskContent;
+        data[taskIndex].date = taskDate;
+
+        // Write the updated data back to the JS file
+        const updatedDataString = `const dados = ${JSON.stringify(data, null, 2)};\n`;
+        fs.writeFileSync(filePath, updatedDataString);
+
+        // Redirect back to the main page after editing the task
+        res.redirect('/');
     } else {
-        res.status(404).json({ message: 'Tasks not found' });
+        // If the task is not found, send an error response
+        res.status(404).send('Task not found.');
     }
 }
 
-function loopJSON() {
-    // Read the JSON file
-    fs.readFile('data.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-            return;
+//REMOVE
+function removeTask(req, res) {
+    // Extract task ID from the request body
+    let taskId = parseInt(req.body.removeTaskId);
+    
+    // Path to the data.js file inside the "www/scripts" directory
+    const filePath = path.join(__dirname, 'www', 'scripts', 'data.js');
+
+    // Read existing data from the JS file
+    let data = [];
+    if (fs.existsSync(filePath)) {
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const dataString = fileContent.match(/const dados\s*=\s*(\[.*\]);/s);
+        if (dataString && dataString[1]) {
+            data = JSON.parse(dataString[1]);
         }
+    }
+    console.log(taskId);
+    // Find the index of the task with the provided ID
+    const taskIndex = data.findIndex(task => task.id === taskId);
+    // If the task exists, remove it from the data array
+    if (taskIndex !== -1) {
+        data.splice(taskIndex, 1);
 
-        const { showTasksButton } = req.body;
+        // Write the updated data back to the JS file
+        const updatedDataString = `const dados = ${JSON.stringify(data, null, 2)};\n`;
+        fs.writeFileSync(filePath, updatedDataString);
 
-        // Parse the JSON data into a JavaScript array of objects
-        const jsonData = JSON.parse(data);
-
-        // Loop through each object in the array
-        jsonData.forEach((task, index) => {
-            // Access the content and date properties of each object
-            //console.log(`Task ${index + 1}: Content - ${task.content}, Date - ${task.date}`);
-        });
-    });
+        // Redirect back to the main page after removing the task
+        res.redirect('/');
+    } else {
+        // If the task with the provided ID doesn't exist, send an error response
+        res.status(404).send('Task not found');
+    }
 }
-
 
 // Export the functions
 module.exports = {
     addTask,
-    editTask
+    editTask,
+    removeTask
 };

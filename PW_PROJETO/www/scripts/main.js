@@ -23,12 +23,11 @@ function addTasks() {
 }
 
 function tableLine(task) {
-    var detailsDiv = document.createElement("div");
-    detailsDiv.style.display = "inline-block";
-
     var li = document.createElement("li");
     li.className = "task-item";
 
+    var detailsDiv = document.createElement("div");
+    detailsDiv.style.display = "inline-block";
 
     for (var property in task) {
         if (task.hasOwnProperty(property) && property !== 'id') {
@@ -47,27 +46,44 @@ function tableLine(task) {
     var buttonDiv = document.createElement("div");
     buttonDiv.className = "divButtonEditRemove";
 
-    var deleteBtn = document.createElement("button");
-    deleteBtn.title = "Remover Tarefa";
-    deleteBtn.textContent = "Delete";
-    deleteBtn.addEventListener("click", function () {
-        window.info.removeTasks(task.id);
-    });
-    deleteBtn.className = "removeTaskButton";
-
     var editBtn = document.createElement("button");
     editBtn.title = "Editar Tarefa";
     editBtn.textContent = "Edit";
     editBtn.addEventListener("click", function () {
-        window.info.callEdit(task.id, task.taskContent, task.taskDate);
+        window.info.callEdit(task.id, task.content, task.date);
     });
     editBtn.className = "editTaskButton";
 
-    buttonDiv.appendChild(deleteBtn);
-    buttonDiv.appendChild(editBtn);
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = "/removeTask";
+
+    var deleteBtn = document.createElement("button");
+    deleteBtn.type = "button"; // Set type to button to prevent form submission
+    deleteBtn.title = "Remover Tarefa";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", function () {
+        form.submit();
+    });
+
+    deleteBtn.className = "removeTaskButton";
+
+    var removeTaskIdInput = document.createElement("input");
+    removeTaskIdInput.type = "hidden";
+    removeTaskIdInput.id = "removeTaskId";
+    removeTaskIdInput.name = "removeTaskId";
+    removeTaskIdInput.value = task.id;
+
+
+    form.appendChild(removeTaskIdInput);
+    form.appendChild(deleteBtn);
+    buttonDiv.appendChild(form);
+    buttonDiv.appendChild(editBtn); // Edit button appended before the form
 
     li.appendChild(detailsDiv);
     li.appendChild(buttonDiv);
 
     return li;
 }
+
+

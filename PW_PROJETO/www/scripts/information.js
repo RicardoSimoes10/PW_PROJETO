@@ -17,7 +17,7 @@ class Information {
     /*Mostra todas as tarefas*/
     showTasks() {
         //Verifica se existe tarefas
-        if (this.tasks != "") {
+        if (dados != "") {
             document.getElementById("tituloListaTarefas").style.display = "block";
             document.getElementById(this.id).style.display = "block";
         }
@@ -35,46 +35,14 @@ class Information {
         document.getElementById("information").innerHTML = "";
 
         let lista = document.getElementById("information");
-        this.tasks.forEach(task => {
+        dados.forEach(task => {
             let li = tableLine(task);
             lista.appendChild(li);
         });
         document.getElementById("taskListDivInformation").replaceChildren(lista);
     }
 
-    /*Remove uma tarefa*/
-    removeTasks(id) {
-        let indexToRemove = this.tasks.findIndex(task => task.id === id); // Encontra o índice da tarefa pelo ID
-
-        if (indexToRemove !== -1) {
-            this.tasks.splice(indexToRemove, 1); // Remove a tarefa do array
-
-            //Ajusta os IDs das tarefas
-            for (let i = 0; i < this.tasks.length; i++) {
-                if (this.tasks[i].id > id) {
-                    this.tasks[i].id--;
-                }
-            }
-        }
-        else
-            alert("Tarefa não encontrada!!");
-
-        //Guarda o array no localStorage
-        let data = JSON.stringify(this.tasks);
-        localStorage.setItem("tarefas", data);
-
-        this.showTasks();//Atualiza a tabela
-
-        //Se o array for vazio, nao mostra nenhum tipo de informação (HTML)
-        if (this.tasks.length == 0) {
-            document.getElementById("mainInformation").style.display = "none";
-        }
-    }
-
     callEdit(id, text, date) {
-        console.log(id);
-        console.log(text);
-        console.log(date);
         document.getElementById("editTaskInput").value = text;
         document.getElementById("editTaskDate").value = date;
         document.getElementById("editTaskId").value = id;

@@ -19,12 +19,13 @@ app.post("/addTask", requestHandlers.addTask);
 // Route to handle editing tasks
 app.post("/editTask", requestHandlers.editTask);
 
+// Route to handle removing tasks
+app.post("/removeTask", requestHandlers.removeTask);
+
 // Redirect root URL to index.html
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "www", "index.html"));
 });
-
-//app.get("/tasks", requestHandlers.fetchTasks);
 
 // Start the server
 const PORT = process.env.PORT || 8081;
