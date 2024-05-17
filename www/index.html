@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas</title>
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/tarefa.js"></script>
     <script src="scripts/information.js"></script>
-    <script src="scripts/main.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <script src="scripts/tarefa.js"></script>
+    
 </head>
 
 <body>
@@ -36,7 +37,7 @@
         <input type="date" id="taskDate" name="taskDate">
     </form>
     <!--EDIT FORM-->
-    <form id="editForm" class="editFormContainer" method="post" action="/editTask" onsubmit="editTask(event)">
+    <form id="editForm" class="editFormContainer" method="post" action="/editTask">
         <h1 id="tarefaTitle">Editar Tarefa</h1>
         <div class="inputContainer">
             <input type="text" id="editTaskInput" name="taskContent" placeholder="Editar tarefa ..." required>

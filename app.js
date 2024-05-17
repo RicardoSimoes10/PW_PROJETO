@@ -1,33 +1,13 @@
-// app.js
-
 const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+var bodyParser = require('body-parser')
 const requestHandlers = require("./request-handlers");
 
 const app = express();
-
-// Middleware to parse URL-encoded bodies
+app.use(express.static("www"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the 'www' directory
-app.use(express.static("www"));
-
-// Route to handle adding tasks
 app.post("/addTask", requestHandlers.addTask);
 
-// Route to handle editing tasks
-app.post("/editTask", requestHandlers.editTask);
-
-// Redirect root URL to index.html
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "www", "index.html"));
-});
-
-//app.get("/tasks", requestHandlers.fetchTasks);
-
-// Start the server
-const PORT = process.env.PORT || 8081;
-app.listen(PORT, function () {
-    console.log(`Server running at http://localhost:${PORT}`);
+app.listen(8081, function () {
+    console.log("Server running at http://localhost:8081");
 });
