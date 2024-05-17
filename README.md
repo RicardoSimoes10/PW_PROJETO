@@ -1,3 +1,3 @@
 # PW_PROJETO
 
-commit teste;
+Web app para ADICIONAR, EDITAR e REMOVER TAREFAS.
