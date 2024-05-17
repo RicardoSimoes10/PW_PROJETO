@@ -1,74 +1,33 @@
-const http = require('http');
-const path = require('path');
-const fs = require('fs');
-const url = require('url');
-const opt = {
-'default': { 'folder': 'www', 'document': 'index.html', 'port': 8081, 'favicon': ''},
-'extensions': {
-    'htm': 'text/html; charset=utf-8',
-    'html': 'text/html; charset=utf-8',
-    'js': 'application/javascript; charset=utf-8',
-    'json': 'application/json; charset=utf-8',
-    'css': 'text/css; charset=utf-8',
-    'gif': 'image/gif',
-    'jpg': 'image/jpg',
-    'png': 'image/png',
-    'ico': 'image/x-icon'}
-}
+// app.js
 
-function mimeType(fileName) {
-    let extension = path.extname(fileName);
-    extension = (extension[0] == '.') ? extension.slice(1) : extension;
-    return opt.extensions[extension];
-}
-    
-function router(request) {
-    let pathname = url.parse(request.url).pathname;
-    switch (pathname) {
-        case '/': pathname += opt.default.document; break;
-        case '/favicon.ico': pathname = opt.default.favicon; break;
-    }
-    return path.join(__dirname, opt.default.folder, pathname);
-}
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const requestHandlers = require("./request-handlers");
 
-const server = http.createServer( (request, response) => {
-    console.log(`Request for ${request.url} received.`);
-    const filename = router(request);
-    fs.readFile(filename, (err, data) => {
-        if (err) {
-            console.log(err);
-            response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-            response.write('HTTP Status: 404 : NOT FOUND');
-        } else {
-            response.writeHead(200, { 'Content-Type': mimeType(filename) });
-            response.write(data);
-        }
-        response.end();
-    });
+const app = express();
+
+// Middleware to parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Serve static files from the 'www' directory
+app.use(express.static("www"));
+
+// Route to handle adding tasks
+app.post("/addTask", requestHandlers.addTask);
+
+// Route to handle editing tasks
+app.post("/editTask", requestHandlers.editTask);
+
+// Redirect root URL to index.html
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "www", "index.html"));
 });
 
-server.listen(opt.default.port, () => {
-    console.log(`Running at http://localhost:${opt.default.port}`)
+//app.get("/tasks", requestHandlers.fetchTasks);
+
+// Start the server
+const PORT = process.env.PORT || 8081;
+app.listen(PORT, function () {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
-
-
-
-/*Guardar esta funcao num ficheiro.js à parte*/
-function saveTasksToFile(tasks, filePath) {
-    fs.writeFile(filePath, JSON.stringify(tasks), (err) => {
-        if (err) {
-            console.error('Error saving tasks to file:', err);
-        } else {
-            console.log('Tasks saved to file successfully.');
-        }
-    });
-}
-
-//EXEMPLO
-const tasks = [
-    { id: 1, taskContent: 'Task 1', taskDate: '2000-03-22' },
-    { id: 2, taskContent: 'Task 2', taskDate: '2000-12-21' }
-];
-
-const filePath = 'tasks.json';
-saveTasksToFile(tasks, filePath);//De alguma forma chamar esta funcao quando fazemos ADD, UPDATE ou REMOVE nas tarefas

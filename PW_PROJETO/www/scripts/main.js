@@ -1,4 +1,5 @@
 "use strict";
+
 /**
  * Função que será executada quando a página estiver toda carregada, criando a variável global "info" com um objeto Information
  * @memberof window
@@ -21,7 +22,6 @@ function addTasks() {
     info.tasks.push(new Tarefa(3, "teste3", "2000-12-21"));
 }
 
-
 function tableLine(task) {
     var detailsDiv = document.createElement("div");
     detailsDiv.style.display = "inline-block";
@@ -34,7 +34,7 @@ function tableLine(task) {
         if (task.hasOwnProperty(property) && property !== 'id') {
             var span = document.createElement("span");
             span.textContent = task[property];
-            if (property === 'taskText') {
+            if (property === 'taskContent') {
                 span.style.fontSize = "inherit";
             } else if (property === 'taskDate') {
                 span.style.fontSize = "11px";
@@ -51,7 +51,6 @@ function tableLine(task) {
     deleteBtn.title = "Remover Tarefa";
     deleteBtn.textContent = "Delete";
     deleteBtn.addEventListener("click", function () {
-        //li.style.animation = "fadeOut 0.5s ease forwards";
         window.info.removeTasks(task.id);
     });
     deleteBtn.className = "removeTaskButton";
