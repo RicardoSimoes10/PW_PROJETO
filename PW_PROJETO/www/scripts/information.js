@@ -28,12 +28,12 @@ class Information {
 
         document.getElementById("tarefaTitle").textContent = "Adicionar Tarefa";
 
-        //Limpa os inputs depois de editar a tarefa
+        
         document.getElementById("taskInput").value = "";
         document.getElementById("taskDate").value = "";
 
         document.getElementById("addForm").style.display = "block";
-        document.getElementById("information").innerHTML = "";
+        document.getElementById("information").innerText = "";
 
         let lista = document.getElementById("information");
         this.tasks.forEach(task => {
