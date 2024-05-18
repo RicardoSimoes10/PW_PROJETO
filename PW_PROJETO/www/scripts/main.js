@@ -5,20 +5,26 @@
  * @memberof window
  * @params {Event} event - objeto que representará o evento
  */
+
+import data from '../data.json' with {type: 'json'};
+
 window.onload = function (event) {
     var info = new Information("mainInformation");
     window.info = info;
+    window.info.tasks = data.reverse();
+    window.tableLine = tableLine;
 };
 
-function tableLine(task) {
-    var li = document.createElement("li");
-    li.className = "task-item";
-
+function tableLine(task) {  
     var detailsDiv = document.createElement("div");
     detailsDiv.style.display = "inline-block";
 
+    var li = document.createElement("li");
+    li.value = task.id; // Colocamos o id como valor
+    li.className = "task-item";
+
     for (var property in task) {
-        if (task.hasOwnProperty(property) && property !== 'id') {
+        if (task.hasOwnProperty(property) && property !== 'id' && property !== 'valid') {
             var span = document.createElement("span");
             span.textContent = task[property];
             if (property === 'taskContent') {
@@ -44,7 +50,7 @@ function tableLine(task) {
 
     var form = document.createElement("form");
     form.method = "post";
-    form.action = "/removeTask";
+    form.action = `/removeTask/${task.id}`;
 
     var deleteBtn = document.createElement("button");
     deleteBtn.type = "button"; // Set type to button to prevent form submission
@@ -73,5 +79,3 @@ function tableLine(task) {
 
     return li;
 }
-
-

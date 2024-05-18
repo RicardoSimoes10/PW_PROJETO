@@ -11,36 +11,41 @@
 class Information {
     constructor(id) {
         this.id = id;
+        this.tasks = [];
     }
 
-    /*Mostra todas as tarefas*/
     showTasks() {
-        this.tasks = dados; //Atribui ao array "tasks" os valores do ficheiro data.js (dados) 
-
-        //Verifica se existe tarefas
-        if (this.tasks != "") {
-            document.getElementById("tituloListaTarefas").style.display = "block";
-            document.getElementById(this.id).style.display = "block";
-        }
-
         document.getElementById("editForm").style.display = "none";
         document.getElementById("addForm").style.display = "block";
 
         document.getElementById("tarefaTitle").textContent = "Adicionar Tarefa";
 
-        
+        //Limpa os inputs depois de editar a tarefa
         document.getElementById("taskInput").value = "";
         document.getElementById("taskDate").value = "";
 
         document.getElementById("addForm").style.display = "block";
-        document.getElementById("information").innerText = "";
+        document.getElementById("information").innerHTML = "";
 
         let lista = document.getElementById("information");
+        let count = 0;
         this.tasks.forEach(task => {
-            let li = tableLine(task);
-            lista.appendChild(li);
+            if (task.valid == true) {
+                let li = window.tableLine(task);
+                lista.appendChild(li);
+                count++;
+            }
         });
         document.getElementById("taskListDivInformation").replaceChildren(lista);
+
+        //Verifica se existe tarefas
+        if (count > 0) {
+            document.getElementById("tituloListaTarefas").style.display = "block";
+            document.getElementById(this.id).style.display = "block";
+        } else {
+            document.getElementById("tituloListaTarefas").style.display = "none";
+            document.getElementById(this.id).style.display = "none";
+        }
     }
 
     callEdit(id, text, date) {
@@ -51,5 +56,7 @@ class Information {
         document.getElementById("mainInformation").style.display = "none";
         document.getElementById("editForm").style.display = "block";
         document.getElementById("addForm").style.display = "none";
+
+        document.getElementById("editForm").action = `/editTask/${id}`;
     }
 }
