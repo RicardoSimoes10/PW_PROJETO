@@ -1,17 +1,1 @@
-[
-  {
-    "id": 1,
-    "task": "Ricardo",
-    "taskDate": "2022-02-12"
-  },
-  {
-    "id": 2,
-    "task": "Lucas",
-    "taskDate": "2022-02-12"
-  },
-  {
-    "id": 3,
-    "content": "Thiago",
-    "date": "2024-05-02"
-  }
-]
+[{"id":1,"task":"Ricardo","taskDate":"2022-02-12","valid":true},{"id":2,"task":"Lucas","taskDate":"2022-02-12","valid":true},{"id":3,"content":"Thiago","date":"2024-05-02","valid":true},{"id":4,"content":"Bruno","date":"2024-05-06","valid":true}]

@@ -14,11 +14,9 @@ class Information {
         this.tasks = [];
     }
 
-    /*Mostra todas as tarefas*/
     showTasks() {
         //Verifica se existe tarefas
-        console.log(this.tasks);
-        if (this.tasks != "") {
+        if (this.tasks.length != 0) {
             document.getElementById("tituloListaTarefas").style.display = "block";
             document.getElementById(this.id).style.display = "block";
         }
@@ -37,13 +35,14 @@ class Information {
 
         let lista = document.getElementById("information");
         this.tasks.forEach(task => {
-            let li = window.tableLine(task);
-            lista.appendChild(li);
+            if(task.valid == true) {
+                let li = window.tableLine(task);
+                lista.appendChild(li);
+            }
         });
         document.getElementById("taskListDivInformation").replaceChildren(lista);
     }
 
-    /*Remove uma tarefa*/
     removeTasks(id) {
         let indexToRemove = this.tasks.findIndex(task => task.id === id); // Encontra o índice da tarefa pelo ID
 
@@ -64,18 +63,10 @@ class Information {
         let data = JSON.stringify(this.tasks);
         localStorage.setItem("tarefas", data);
 
-        this.showTasks();//Atualiza a tabela
-
-        //Se o array for vazio, nao mostra nenhum tipo de informação (HTML)
-        if (this.tasks.length == 0) {
-            document.getElementById("mainInformation").style.display = "none";
-        }
+        this.showTasks();
     }
 
     callEdit(id, text, date) {
-        console.log(id);
-        console.log(text);
-        console.log(date);
         document.getElementById("editTaskInput").value = text;
         document.getElementById("editTaskDate").value = date;
         document.getElementById("editTaskId").value = id;
@@ -83,5 +74,7 @@ class Information {
         document.getElementById("mainInformation").style.display = "none";
         document.getElementById("editForm").style.display = "block";
         document.getElementById("addForm").style.display = "none";
+
+        document.getElementById("editForm").action = `/editTask/${id}`;
     }
 }
